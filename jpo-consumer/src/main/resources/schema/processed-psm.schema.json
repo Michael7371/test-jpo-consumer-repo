@@ -1,0 +1,98 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "J2735PersonalDeviceUserType" : {
+      "type" : "string",
+      "enum" : [ "unavailable", "aPEDESTRIAN", "aPEDALCYCLIST", "aPUBLICSAFETYWORKER", "anANIMAL" ]
+    },
+    "ProcessedValidationMessage" : {
+      "type" : "object",
+      "properties" : {
+        "exception" : {
+          "type" : "string"
+        },
+        "jsonPath" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "schemaPath" : {
+          "type" : "string"
+        }
+      }
+    },
+    "PsmFeature(Object)" : {
+      "type" : "object",
+      "properties" : {
+        "geometry" : { },
+        "id" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "properties" : {
+          "$ref" : "#/$defs/PsmProperties"
+        }
+      }
+    },
+    "PsmProperties" : {
+      "type" : "object",
+      "properties" : {
+        "basicType" : {
+          "$ref" : "#/$defs/J2735PersonalDeviceUserType"
+        },
+        "heading" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "msgCnt" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "secMark" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "speed" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "features" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/PsmFeature(Object)"
+      }
+    },
+    "messageType" : {
+      "type" : "string"
+    },
+    "odeReceivedAt" : {
+      "type" : "string"
+    },
+    "originIp" : {
+      "type" : "string"
+    },
+    "schemaVersion" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "timeStamp" : {
+      "type" : "string",
+      "format" : "date-time"
+    },
+    "validationMessages" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/ProcessedValidationMessage"
+      }
+    }
+  }
+}

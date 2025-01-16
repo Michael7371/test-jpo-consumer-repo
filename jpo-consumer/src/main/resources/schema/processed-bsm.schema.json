@@ -1,0 +1,184 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "BsmFeature(Object)" : {
+      "type" : "object",
+      "properties" : {
+        "geometry" : { },
+        "id" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "properties" : {
+          "$ref" : "#/$defs/BsmProperties"
+        }
+      }
+    },
+    "BsmProperties" : {
+      "type" : "object",
+      "properties" : {
+        "accelSet" : {
+          "$ref" : "#/$defs/J2735AccelerationSet4Way"
+        },
+        "accuracy" : {
+          "$ref" : "#/$defs/J2735PositionalAccuracy"
+        },
+        "angle" : {
+          "type" : "number"
+        },
+        "brakes" : {
+          "$ref" : "#/$defs/J2735BrakeSystemStatus"
+        },
+        "heading" : {
+          "type" : "number"
+        },
+        "id" : {
+          "type" : "string"
+        },
+        "msgCnt" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "secMark" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "size" : {
+          "$ref" : "#/$defs/J2735VehicleSize"
+        },
+        "speed" : {
+          "type" : "number"
+        },
+        "transmission" : {
+          "$ref" : "#/$defs/J2735TransmissionState"
+        }
+      }
+    },
+    "J2735AccelerationSet4Way" : {
+      "type" : "object",
+      "properties" : {
+        "accelLat" : {
+          "type" : "number"
+        },
+        "accelLong" : {
+          "type" : "number"
+        },
+        "accelVert" : {
+          "type" : "number"
+        },
+        "accelYaw" : {
+          "type" : "number"
+        }
+      }
+    },
+    "J2735BitString" : {
+      "type" : "object"
+    },
+    "J2735BrakeSystemStatus" : {
+      "type" : "object",
+      "properties" : {
+        "abs" : {
+          "type" : "string"
+        },
+        "auxBrakes" : {
+          "type" : "string"
+        },
+        "brakeBoost" : {
+          "type" : "string"
+        },
+        "scs" : {
+          "type" : "string"
+        },
+        "traction" : {
+          "type" : "string"
+        },
+        "wheelBrakes" : {
+          "$ref" : "#/$defs/J2735BitString"
+        }
+      }
+    },
+    "J2735PositionalAccuracy" : {
+      "type" : "object",
+      "properties" : {
+        "orientation" : {
+          "type" : "number"
+        },
+        "semiMajor" : {
+          "type" : "number"
+        },
+        "semiMinor" : {
+          "type" : "number"
+        }
+      }
+    },
+    "J2735TransmissionState" : {
+      "type" : "string",
+      "enum" : [ "NEUTRAL", "PARK", "FORWARDGEARS", "REVERSEGEARS", "RESERVED1", "RESERVED2", "RESERVED3", "UNAVAILABLE" ]
+    },
+    "J2735VehicleSize" : {
+      "type" : "object",
+      "properties" : {
+        "length" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "width" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "ProcessedValidationMessage" : {
+      "type" : "object",
+      "properties" : {
+        "exception" : {
+          "type" : "string"
+        },
+        "jsonPath" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "schemaPath" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "features" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/BsmFeature(Object)"
+      }
+    },
+    "logName" : {
+      "type" : "string"
+    },
+    "messageType" : {
+      "type" : "string"
+    },
+    "odeReceivedAt" : {
+      "type" : "string"
+    },
+    "originIp" : {
+      "type" : "string"
+    },
+    "schemaVersion" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "timeStamp" : {
+      "type" : "string",
+      "format" : "date-time"
+    },
+    "validationMessages" : {
+      "type" : "array",
+      "items" : {
+        "$ref" : "#/$defs/ProcessedValidationMessage"
+      }
+    }
+  }
+}

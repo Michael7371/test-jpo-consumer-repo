@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: jpo-consumer
+  kafka:
+    bootstrap-servers: localhost:9092
+    
+kafka:
+  consumer:
+    group-id: jpo-consumer-group

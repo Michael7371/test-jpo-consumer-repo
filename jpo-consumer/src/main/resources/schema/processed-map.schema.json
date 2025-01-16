@@ -1,0 +1,340 @@
+{
+  "$schema" : "https://json-schema.org/draft/2020-12/schema",
+  "$defs" : {
+    "ConnectingLanesFeature(Object)" : {
+      "type" : "object",
+      "properties" : {
+        "geometry" : { },
+        "id" : {
+          "type" : "string"
+        },
+        "properties" : {
+          "$ref" : "#/$defs/ConnectingLanesProperties"
+        }
+      }
+    },
+    "ConnectingLanesFeatureCollection(Object)" : {
+      "type" : "object",
+      "properties" : {
+        "features" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/ConnectingLanesFeature(Object)"
+          }
+        }
+      }
+    },
+    "ConnectingLanesProperties" : {
+      "type" : "object",
+      "properties" : {
+        "egressLaneId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "ingressLaneId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "signalGroupId" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "J2735BitString" : {
+      "type" : "object"
+    },
+    "J2735ConnectingLane" : {
+      "type" : "object",
+      "properties" : {
+        "lane" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "maneuver" : {
+          "$ref" : "#/$defs/J2735BitString"
+        }
+      }
+    },
+    "J2735Connection" : {
+      "type" : "object",
+      "properties" : {
+        "connectingLane" : {
+          "$ref" : "#/$defs/J2735ConnectingLane"
+        },
+        "connectionID" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "remoteIntersection" : {
+          "$ref" : "#/$defs/J2735IntersectionReferenceID"
+        },
+        "signalGroup" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "userClass" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "J2735IntersectionReferenceID" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "region" : {
+          "type" : "integer",
+          "format" : "int32"
+        }
+      }
+    },
+    "J2735LaneTypeAttributes" : {
+      "type" : "object",
+      "properties" : {
+        "bikeLane" : {
+          "$ref" : "#/$defs/J2735BitString"
+        },
+        "crosswalk" : {
+          "$ref" : "#/$defs/J2735BitString"
+        },
+        "median" : {
+          "$ref" : "#/$defs/J2735BitString"
+        },
+        "parking" : {
+          "$ref" : "#/$defs/J2735BitString"
+        },
+        "sidewalk" : {
+          "$ref" : "#/$defs/J2735BitString"
+        },
+        "striping" : {
+          "$ref" : "#/$defs/J2735BitString"
+        },
+        "trackedVehicle" : {
+          "$ref" : "#/$defs/J2735BitString"
+        },
+        "vehicle" : {
+          "$ref" : "#/$defs/J2735BitString"
+        }
+      }
+    },
+    "J2735RegulatorySpeedLimit" : {
+      "type" : "object",
+      "properties" : {
+        "speed" : {
+          "type" : "number"
+        },
+        "type" : {
+          "$ref" : "#/$defs/J2735SpeedLimitType"
+        }
+      }
+    },
+    "J2735SpeedLimitType" : {
+      "type" : "string",
+      "enum" : [ "unknown", "maxSpeedInSchoolZone", "maxSpeedInSchoolZoneWhenChildrenArePresent", "maxSpeedInConstructionZone", "vehicleMinSpeed", "vehicleMaxSpeed", "vehicleNightMaxSpeed", "truckMinSpeed", "truckMaxSpeed", "truckNightMaxSpeed", "vehiclesWithTrailersMinSpeed", "vehiclesWithTrailersMaxSpeed", "vehiclesWithTrailersNightMaxSpeed" ]
+    },
+    "MapFeature(Object)" : {
+      "type" : "object",
+      "properties" : {
+        "geometry" : { },
+        "id" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "properties" : {
+          "$ref" : "#/$defs/MapProperties"
+        }
+      }
+    },
+    "MapFeatureCollection(Object)" : {
+      "type" : "object",
+      "properties" : {
+        "features" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/MapFeature(Object)"
+          }
+        }
+      }
+    },
+    "MapNode" : {
+      "type" : "object",
+      "properties" : {
+        "delta" : {
+          "type" : "array",
+          "items" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        },
+        "stopLine" : {
+          "type" : "boolean"
+        }
+      }
+    },
+    "MapProperties" : {
+      "type" : "object",
+      "properties" : {
+        "connectsTo" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/J2735Connection"
+          }
+        },
+        "egressApproach" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "egressPath" : {
+          "type" : "boolean"
+        },
+        "ingressApproach" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "ingressPath" : {
+          "type" : "boolean"
+        },
+        "laneId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "laneName" : {
+          "type" : "string"
+        },
+        "laneType" : {
+          "$ref" : "#/$defs/J2735LaneTypeAttributes"
+        },
+        "maneuvers" : {
+          "$ref" : "#/$defs/J2735BitString"
+        },
+        "nodes" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/MapNode"
+          }
+        },
+        "sharedWith" : {
+          "$ref" : "#/$defs/J2735BitString"
+        }
+      }
+    },
+    "MapSharedProperties" : {
+      "type" : "object",
+      "properties" : {
+        "cti4501Conformant" : {
+          "type" : "boolean"
+        },
+        "intersectionId" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "intersectionName" : {
+          "type" : "string"
+        },
+        "laneWidth" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "mapSource" : {
+          "$ref" : "#/$defs/MapSource"
+        },
+        "messageType" : {
+          "type" : "string"
+        },
+        "msgIssueRevision" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "odeReceivedAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "originIp" : {
+          "type" : "string"
+        },
+        "refPoint" : {
+          "$ref" : "#/$defs/OdePosition3D"
+        },
+        "region" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "revision" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "schemaVersion" : {
+          "type" : "integer",
+          "format" : "int32"
+        },
+        "speedLimits" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/J2735RegulatorySpeedLimit"
+          }
+        },
+        "timeStamp" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "validationMessages" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/$defs/ProcessedValidationMessage"
+          }
+        }
+      }
+    },
+    "MapSource" : {
+      "type" : "string",
+      "enum" : [ "RSU", "V2X", "MMITSS", "unknown" ]
+    },
+    "OdePosition3D" : {
+      "type" : "object",
+      "properties" : {
+        "elevation" : {
+          "type" : "number"
+        },
+        "latitude" : {
+          "type" : "number"
+        },
+        "longitude" : {
+          "type" : "number"
+        }
+      }
+    },
+    "ProcessedValidationMessage" : {
+      "type" : "object",
+      "properties" : {
+        "exception" : {
+          "type" : "string"
+        },
+        "jsonPath" : {
+          "type" : "string"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "schemaPath" : {
+          "type" : "string"
+        }
+      }
+    }
+  },
+  "type" : "object",
+  "properties" : {
+    "connectingLanesFeatureCollection" : {
+      "$ref" : "#/$defs/ConnectingLanesFeatureCollection(Object)"
+    },
+    "mapFeatureCollection" : {
+      "$ref" : "#/$defs/MapFeatureCollection(Object)"
+    },
+    "properties" : {
+      "$ref" : "#/$defs/MapSharedProperties"
+    }
+  }
+}
